@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Arbol Decision</title>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Agrega los scripts de Bootstrap (jQuery y Popper.js) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+
+    <!-- Agrega el script de Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form>
+                    <!-- Tabla principal contenedora -->
+                    <div class="table table-bordered">
+                        <tr>   
+                            <div class="card">
+                                <h5 class="card-header">Porcentajes</h5>
+                                <div class="card-body">
+                                    <table>
+                                        <thead>
+                                            <th><input type="number" class="form-control"></th>      
+                                            <th><input type="number" class="form-control"></th>
+                                            <th><input type="number" class="form-control"></th>
+                                            <th><input type="number" class="form-control"></th>
+                                            <th><input type="number" class="form-control"></th>
+                                            <th><input type="number" class="form-control"></th>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </tr>
+
+                        <tr>        
+                            <div class="card">
+                                <h5 class="card-header">Valores</h5>
+                                <div class="card-body">
+                                    <table>
+
+                                        <!-- Inputs con valores a calcular -->
+                                        <tr> 
+                                            <th><input name="11" type="text" value="X" class="form-control" onChange="makeit('11', this.form)"></th>
+                                            <th><input name="12" type="text" value="X" class="form-control" onChange="makeit('12', this.form)"></th>
+                                            <th><input name="13" type="text" value="X" class="form-control" onChange="makeit('13', this.form)"></th>
+                                            <th><input name="14" type="text" value="X" class="form-control" onChange="makeit('14', this.form)"></th>
+                                            <th><input name="15" type="text" value="X" class="form-control" onChange="makeit('15', this.form)"></th>
+                                            <th><input name="16" type="text" value="X" class="form-control" onChange="makeit('16', this.form)"></th>
+                                        </tr>
+                                        <tr> 
+                                            <th><input name="21" type="text" value="X" class="form-control" onChange="makeit('21', this.form)"></th>
+                                            <th><input name="22" type="text" value="X" class="form-control" onChange="makeit('22', this.form)"></th>
+                                            <th><input name="23" type="text" value="X" class="form-control" onChange="makeit('23', this.form)"></th>
+                                            <th><input name="24" type="text" value="X" class="form-control" onChange="makeit('24', this.form)"></th>
+                                            <th><input name="25" type="text" value="X" class="form-control" onChange="makeit('25', this.form)"></th>
+                                            <th><input name="26" type="text" value="X" class="form-control" onChange="makeit('26', this.form)"></th>
+                                        </tr>
+
+                                        <tr> 
+                                            <th><input name="31" type="text" value="X" class="form-control" onChange="makeit('31', this.form)"></th>
+                                            <th><input name="32" type="text" value="X" class="form-control" onChange="makeit('32', this.form)"></th>
+                                            <th><input name="33" type="text" value="X" class="form-control" onChange="makeit('33', this.form)"></th>
+                                            <th><input name="34" type="text" value="X" class="form-control" onChange="makeit('34', this.form)"></th>
+                                            <th><input name="35" type="text" value="X" class="form-control" onChange="makeit('35', this.form)"></th>
+                                            <th><input name="36" type="text" value="X" class="form-control" onChange="makeit('36', this.form)"></th>
+                                        </tr>
+                                        <tr> 
+                                            <th><input name="41" type="text" value="X" class="form-control" onChange="makeit('41', this.form)"></th>
+                                            <th><input name="42" type="text" value="X" class="form-control" onChange="makeit('42', this.form)"></th>
+                                            <th><input name="43" type="text" value="X" class="form-control" onChange="makeit('43', this.form)"></th>
+                                            <th><input name="44" type="text" value="X" class="form-control" onChange="makeit('44', this.form)"></th>
+                                            <th><input name="45" type="text" value="X" class="form-control" onChange="makeit('45', this.form)"></th>
+                                            <th><input name="46" type="text" value="X" class="form-control" onChange="makeit('46', this.form)"></th>
+                                        </tr>
+                                        <tr> 
+                                            <th><input name="51" type="text" value="X" class="form-control" onChange="makeit('51', this.form)"></th>
+                                            <th><input name="52" type="text" value="X" class="form-control" onChange="makeit('52', this.form)"></th>
+                                            <th><input name="53" type="text" value="X" class="form-control" onChange="makeit('53', this.form)"></th>
+                                            <th><input name="54" type="text" value="X" class="form-control" onChange="makeit('54', this.form)"></th>
+                                            <th><input name="55" type="text" value="X" class="form-control" onChange="makeit('55', this.form)"></th>
+                                            <th><input name="56" type="text" value="X" class="form-control" onChange="makeit('56', this.form)"></th>
+                                        </tr>
+                                        <tr> 
+                                            <th><input name="61" type="text" value="X" class="form-control" onChange="makeit('61', this.form)"></th>
+                                            <th><input name="62" type="text" value="X" class="form-control" onChange="makeit('62', this.form)"></th>
+                                            <th><input name="63" type="text" value="X" class="form-control" onChange="makeit('63', this.form)"></th>
+                                            <th><input name="64" type="text" value="X" class="form-control" onChange="makeit('64', this.form)"></th>
+                                            <th><input name="65" type="text" value="X" class="form-control" onChange="makeit('65', this.form)"></th>
+                                            <th><input name="66" type="text" value="X" class="form-control" onChange="makeit('66', this.form)"></th>
+                                        </tr>
+                                        <!-- Inputs con valores a calcular -->
+
+                                        <!-- Botones de formulario 1 -->  
+                                        <tr>
+                                            <td colspan=2>
+                                                <input style="width: 100%" class="btn btn-primary" type="button" onClick="calculate(this.form)" value="Calcular Paso 1" name="button">
+                                            </td>
+
+                                            <td colspan=2>
+                                                <input style="width: 100%" class="btn btn-success" type="button" onClick="compute2(this.form)" value="Calcular Paso 2" name="button">
+                                            </td>
+                                            
+                                            <td colspan=2 >
+                                                <input style="width: 100%" class="btn btn-danger" type=reset value="Limpiar datos" onClick="goback()" name="reset" >
+                                            </td>
+                                        </tr>
+                                        <!-- Botones de formulario -->
+
+
+
+                                        <!-- Resultados del calculo - Paso 1 -->
+                                        <tr>
+                                            <td colspan=6>
+                                                <h5 class="card-header">Resultados - Paso 1</h5>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="text-align: center;" colspan=6>              
+                                                <h5><span style="width: 100%;" class="badge text-bg-primary">The most likely event</span></h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan=3>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Pr, j=</label>
+                                                    <input type="text" class="form-control" name=MLACT placeholder="Pr, j=">                  
+                                                </div>
+                                            </td>
+                                            
+                                            <td colspan=3>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Payoff</label>
+                                                    <input type="text" class="form-control" name=MLPOFF placeholder="Payoff">                  
+                                                </div>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td style="text-align: center;" colspan=6>              
+                                                <h5><span style="width: 100%;" class="badge text-bg-primary">Expected payoff: EP</span></h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan=3>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Action</label>
+                                                    <input type="text" class="form-control" name=MEVACT placeholder="Action">
+                                                </div>
+                                            </td>
+                                            
+                                            <td colspan=3>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Payoff</label>
+                                                    <input type="text" class="form-control" name=MEVPOFF placeholder="Payoff">
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Resultados del calculo - Paso 1 -->
+                                          
+
+                                        <!-- Resultados del calculo - Paso 2 -->
+                                        <tr>
+                                            <td colspan=6>
+                                                <h5 class="card-header">Resultados - Paso 2</h5>
+                                            </td>          
+                                        </tr>
+
+
+                                        <tr>
+                                            <td style="text-align: center;" colspan=6>              
+                                                <h5><span style="width: 100%;" class="badge text-bg-primary">Min expected regret</span></h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan=3>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Action</label>
+                                                    <input type="text" class="form-control" name=MRACT placeholder="Action">                  
+                                                </div>
+                                            </td>
+                                            
+                                            <td colspan=3>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Payoff</label>
+                                                    <input type="text" class="form-control" name=MRPOFF placeholder="Payoff">                  
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        
+                                        
+                                        <tr>
+                                            <td colspan=2>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Return of perfect information</label>
+                                                    <input type="text" class="form-control" name=PFCT placeholder="Return of perfect information">                  
+                                                </div>
+                                            </td>
+                                            
+                                            <td colspan=2>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Value of perfect information: VPI</label>
+                                                    <input type="text" class="form-control" name=SAMPLE placeholder="Value of perfect information: VPI">                  
+                                                </div>
+                                            </td>
+
+                                            <td colspan=2>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Its efficiency: 100(VPI/EP)(%)</label>
+                                                    <input type="text" class="form-control" name=EFF placeholder="Its efficiency: 100(VPI/EP)(%)">                  
+                                                </div>
+                                            </td>          
+                                        </tr>
+
+                                        <!-- Resultados del calculo - Paso 2 -->
+                                    </table>
+                                </div>
+                            </div>                            
+                        </tr>
+
+                    </div> <!-- Tabla principal contenedora -->
+                </form> <!-- FIN Formulario -->
+            </div> <!-- FIN Contenedores Principales -->
+        </div> <!-- FIN Contenedores Principales -->
+    </div> <!-- FIN Contenedores Principales -->
+
+    <script>
+        var maxcolm = 0;
+        var maxrowm = 0;        
+        //*****Reset button function*****************
+        function goback()	{
+            maxcolm = 0;
+            maxrowm = 0;
+            }
+            
+        //THIS FUNCTION WILL RUN AT CHANGE OF EACH CELL
+        function makeit(x,y) 	{
+            maxcolm = 0;
+            maxrowm = 0;
+            var colChange = x.substring(1,2);
+            var rowChange = x.substring(0,1);
+            //here we get the number of column for change
+            if(colChange >= maxcolm)  {
+                maxcolm = colChange;
+                }
+            if(rowChange >= maxrowm)  {
+                maxrowm = rowChange;
+                }
+            //**************
+            for(i=6; i<42; i++)  {
+                var colm = y.elements[i].name.substring(1,2);
+                var rowm = y.elements[i].name.substring(0,1);
+                if((colm <= maxcolm) && (rowm <= maxrowm))  {
+                    if(isNaN(y.elements[i].value))  {
+                        y.elements[i].value = 0;
+                        }                               
+                    }
+                }
+            } //function closing
+            
+            
+    //***********************************************************888888
+        function compute2(X)  {
+            var PRO1 = new Array();
+            for(i=0; i<6; i++) {
+                if((!isNaN(parseFloat(X.elements[i].value)))) {
+                    PRO1[i] = parseFloat(X.elements[i].value);
+                    }
+                }
+            var cells2 = 0;
+              for(i=6; i<=41; i++)  {
+                if((!isNaN(X.elements[i].value))) {
+                        cells2 = cells2 + 1;
+                        }
+                     }
+        
+            //check for insufficient data
+            if(cells2 <=4) { 
+                alert("Insufficient data."); }
+            else {   
+                //get the total number of columns
+                var mc2 = 0;		
+                for(i=6; i<12; i++)  {
+                    if((!isNaN(X.elements[i].value))) {
+                        mc2 = mc2 +1;
+                        }
+                    }
+            //get the total number of rows
+            var mr2 = Math.round(cells2/mc2);
+            
+            //check the validity of TABLE
+            var PR2 = mc2 * mr2;
+            if(PR2 != cells2)  {
+                alert("Data Entry Error:\nPlease check your DATA entry. ROW - COLUMNS mismatch!");
+                return false;
+                }
+            //make an array of each present row
+            var SR12 = new Array();
+            var SR22 = new Array();
+            var SR32 = new Array();
+            var SR42 = new Array();
+            var SR52 = new Array();
+            var SR62 = new Array();				
+            //FIRST ROW
+            var a2 = 0;
+            for(i=6; i<(mc2+6); i++)  {
+                if((!isNaN(X.elements[i].value))) {
+                    SR12[a2] = parseFloat(X.elements[i].value);
+                    a2++;
+                    }
+                  }		
+            a2 = 0;
+            //SECOND ROW
+            for(i=12; i<(mc2+12); i++)  {
+            if((!isNaN(X.elements[i].value))) {
+                    SR22[a2] = parseFloat(X.elements[i].value);
+                    a2++;
+                    }
+                  }
+            a2 = 0;
+            //THIRD row
+            for(i=18; i<(mc2+18); i++)  {
+            if((!isNaN(X.elements[i].value))) {
+                    SR32[a2] = parseFloat(X.elements[i].value);
+                    a2++;
+                    }
+                  } 
+            a2 = 0;
+            //FOURTH row
+            for(i=24; i<(mc2+24); i++)  {
+            if((!isNaN(X.elements[i].value))) {
+                    SR42[a2] = parseFloat(X.elements[i].value);
+                    a2++;
+                    }
+                  } 
+            a2 = 0;
+            //FIFTH row
+            for(i=30; i<(mc2+30); i++)  {
+            if((!isNaN(X.elements[i].value))) {
+                    SR52[a2] = parseFloat(X.elements[i].value);
+                    a2++;
+                    }
+                  } 
+            a2 = 0;
+            //SIXTH row
+            for(i=36; i<(mc2+36); i++)  {
+            if((!isNaN(X.elements[i].value))) {
+                    SR62[a2] = parseFloat(X.elements[i].value);
+                    a2++;
+                    }
+                  }   
+            // create a matrix of mr * mc
+            var TABLE = new Array(mr2);
+            for(i=0; i<mr2; i++) {
+                TABLE[i] = new Array();
+                }
+            var x = 0;
+            
+            TABLE[x] = SR12;
+            x++;
+            if(x<mr2) {
+                TABLE[x] = SR22;
+                x++;
+                }
+            if(x<mr2) {
+                TABLE[x] = SR32;
+                x++;
+                }
+            if(x<mr2) {
+                TABLE[x] = SR42;
+                x++;
+                }
+            if(x<mr2) {
+                TABLE[x] = SR52;
+                x++;
+                }
+            if(x<mr2) {
+                TABLE[x] = SR62;
+                x++;
+                }
+            //find the largest in each column
+        
+            var COL1 = new Array();
+            var COL2 = new Array();
+            var COL3 = new Array();
+            var COL4 = new Array();
+            var COL5 = new Array();
+            var COL6 = new Array();
+            
+            var y = 0;
+            for(i=0; i<mr2; i++)  {
+                COL1[i] = TABLE[i][0];
+                }
+                y++;
+                //sort the list
+                for(i=0; i<COL1.length-1; i++) { 
+                    for(j=i+1;j<COL1.length; j++) {
+                      if( eval(COL1[j]) < eval(COL1[i]))  {
+                              temp = COL1[i];            
+                              COL1[i] = COL1[j];              
+                              COL1[j] = temp;            
+                              }
+                            }
+                        }  
+                var MAX1 = COL1[mr2-1]; 			
+            if(y<mc2)  {
+                for(i=0; i<mr2; i++)  {
+                COL2[i] = TABLE[i][1];
+                }
+                y++;  
+                //sort the list
+                for(i=0; i<COL2.length-1; i++) { 
+                    for(j=i+1;j<COL2.length; j++) {
+                      if( eval(COL2[j]) < eval(COL2[i]))  {
+                              temp = COL2[i];            
+                              COL2[i] = COL2[j];              
+                              COL2[j] = temp;            
+                              }
+                            }
+                        }   
+                var MAX2 = COL2[mr2-1]; }
+            if(y<mc2) {
+                for(i=0; i<mr2; i++)  {
+                COL3[i] = TABLE[i][2];
+                }
+                y++;  
+                //sort the list
+                for(i=0; i<COL3.length-1; i++) { 
+                    for(j=i+1;j<COL3.length; j++) {
+                      if( eval(COL3[j]) < eval(COL3[i]))  {
+                              temp = COL3[i];            
+                              COL3[i] = COL3[j];              
+                              COL3[j] = temp;            
+                              }
+                            }
+                        } 
+                var MAX3 = COL3[mr2-1];  }
+            if(y<mc2)  {
+                for(i=0; i<mr2; i++)  {
+                COL4[i] = TABLE[i][3];
+                }
+                y++;
+                //sort the list
+                for(i=0; i<COL4.length-1; i++) { 
+                    for(j=i+1;j<COL4.length; j++) {
+                      if( eval(COL4[j]) < eval(COL4[i]))  {
+                              temp = COL4[i];            
+                              COL4[i] = COL4[j];              
+                              COL4[j] = temp;            
+                              }
+                            }
+                        }
+                var MAX4 = COL4[mr2-1];   }
+            if(y<mc2)  {
+                for(i=0; i<mr2; i++)  {
+                COL5[i] = TABLE[i][4];
+                }
+                y++;
+                //sort the list
+                for(i=0; i<COL5.length-1; i++) { 
+                    for(j=i+1;j<COL5.length; j++) {
+                      if( eval(COL5[j]) < eval(COL5[i]))  {
+                              temp = COL5[i];            
+                              COL5[i] = COL5[j];              
+                              COL5[j] = temp;            
+                              }
+                            }
+                        }  
+                var MAX5 = COL5[mr2-1]; }
+            if(y<mc2) {
+                for(i=0; i<mr2; i++)  {
+                COL6[i] = TABLE[i][5];
+                }
+                y++;
+                //sort the list
+                for(i=0; i<COL6.length-1; i++) { 
+                    for(j=i+1;j<COL6.length; j++) {
+                      if( eval(COL6[j]) < eval(COL6[i]))  {
+                              temp = COL6[i];            
+                              COL6[i] = COL6[j];              
+                              COL6[j] = temp;            
+                              }
+                            }
+                        } 
+                var MAX6 = COL6[mr2-1];  }
+                
+            //do regret matrix
+            var REGROW1 = new Array();
+            var REGROW2 = new Array();
+            var REGROW3 = new Array();
+            var REGROW4 = new Array();
+            var REGROW5 = new Array();
+            var REGROW6 = new Array();										
+            var REGSML = new Array();
+            var z = 0;
+            var perfect = 0;
+            var SUM02=0; var SUM12=0; var SUM22=0; var SUM32=0; var SUM42=0; var SUM52=0; 
+            for(i=0; i<mr2; i++)  {
+                TABLE[i][0] = MAX1 - TABLE[i][0];
+                REGROW1[i] = TABLE[i][0];
+                }
+                perfect = perfect + MAX1 * PRO1[0];
+                z++;						
+            if(z<mc2)  {
+                for(i=0; i<mr2; i++)  {
+                TABLE[i][1] = MAX2 - TABLE[i][1];
+                REGROW2[i] = TABLE[i][1];
+                }
+                perfect = perfect + MAX2 * PRO1[1];
+                z++; }
+            if(z<mc2) {
+                for(i=0; i<mr2; i++)  {
+                TABLE[i][2] = MAX3 - TABLE[i][2];
+                REGROW3[i] = TABLE[i][2];
+                }
+                perfect = perfect + MAX3 * PRO1[2];	
+                z++;  }
+            if(z<mc2)  {
+                for(i=0; i<mr2; i++)  {
+                TABLE[i][3] = MAX4 - TABLE[i][3];
+                REGROW4[i] = TABLE[i][3];
+                }
+                perfect = perfect + MAX4 * PRO1[3];	
+                z++; }
+            if(z<mc2)  {
+                for(i=0; i<mr2; i++)  {
+                TABLE[i][4] = MAX5 - TABLE[i][4];
+                REGROW5[i] = TABLE[i][4];
+                }
+                perfect = perfect + MAX5 * PRO1[4];	
+                z++;  }
+            if(z<mc2) {
+                for(i=0; i<mr2; i++)  {
+                TABLE[i][5] = MAX6 - TABLE[i][5];
+                REGROW6[i] = TABLE[i][5];
+                }
+                perfect = perfect + MAX6 * PRO1[5];	
+                }		
+                X.PFCT.value = perfect;
+            //create arrays of ROWS
+                var e = 0;
+                var REGR1 = new Array();
+                var REGR2 = new Array();
+                var REGR3 = new Array();
+                var REGR4 = new Array();
+                var REGR5 = new Array();
+                var REGR6 = new Array();
+            for(i=0; i<mc2; i++)  {
+                REGR1[i] = TABLE[0][i];
+                SUM02 += REGR1[i] * PRO1[i];
+                }
+                REGSML[e] = SUM02;
+                e++;
+            if(e<mr2) {
+                for(i=0; i<mc2; i++)  {
+                REGR2[i] = TABLE[1][i];
+                SUM12 += REGR2[i] * PRO1[i];
+                } 
+                REGSML[e] = SUM12;
+                e++;
+                }			
+            if(e<mr2) {
+                for(i=0; i<mc2; i++)  {
+                REGR3[i] = TABLE[2][i];
+                SUM22 += REGR3[i] * PRO1[i];
+                }
+                REGSML[e] = SUM22;
+                e++;
+                 }
+            if(e<mr2) {
+                for(i=0; i<mc2; i++)  {
+                REGR4[i] = TABLE[3][i];
+                SUM32 += REGR4[i] * PRO1[i];
+                } 
+                REGSML[e] = SUM32;
+                e++;
+                }
+            if(e<mr2) {
+                for(i=0; i<mc2; i++)  {
+                REGR5[i] = TABLE[4][i];
+                SUM42 += REGR5[i] * PRO1[i];
+                } 
+                REGSML[e] = SUM42;
+                e++;
+                }
+            if(e<mr2) {
+                for(i=0; i<mc2; i++)  {
+                REGR6[i] = TABLE[5][i];
+                SUM52 += REGR6[i] * PRO1[i];
+                } 
+                REGSML[e] = SUM52;
+                e++;
+                }
+                
+            //sort the list
+            for(i=0; i<REGSML.length-1; i++) { 
+                for(j=i+1;j<REGSML.length; j++) {
+                  if( eval(REGSML[j]) < eval(REGSML[i]))  {
+                          temp = REGSML[i];            
+                          REGSML[i] = REGSML[j];              
+                          REGSML[j] = temp;            
+                          }
+                        }
+                    } 
+                            
+            //check for the smallest expected regret value
+            var temp3 = 0;
+            var maxmin3 = 1000;
+            var act3 = 0;
+            for(i=0; i<mr2; i++)  {
+                temp3 = REGSML[i];
+                if(temp3 < maxmin3) {
+                    maxmin3 = temp3;
+                    act3 = i+1;
+                    }
+                temp3 = 0;
+                }
+            var maxmax1 = X.MEVPOFF.value;
+            var sample = perfect - maxmax1;
+            sample = Math.round(sample*10000)/10000;
+            X.MRACT.value = act3;
+            X.MRPOFF.value = maxmin3;
+            X.SAMPLE.value = sample;
+            var eff = 100*(sample)/perfect;
+            eff = Math.round(eff*10000)/10000;
+            X.EFF.value = eff;
+            }
+        }	
+                    
+    //********************************************************************
+    
+        function calculate(X){                 
+            var SUM = 0;
+            var PRO = new Array();
+            var N = 0;
+            for(i=0; i<6; i++) {
+                if((!isNaN(parseFloat(X.elements[i].value)))) {
+                    PRO[i] = parseFloat(X.elements[i].value);
+                    SUM += parseFloat(X.elements[i].value);
+                    N++;  
+                    }
+                }											
+            if (SUM < 0.9999999999999999 || SUM > 1.0000000000000002) {
+                alert("Error: Sum [" +SUM+ "] of Probabilities should be equal to one. Try again");
+                }
+            else  {               
+                var cells = 0;
+                for(i=6; i<=41; i++)  {
+                if((!isNaN(X.elements[i].value))) {
+                    cells = cells + 1;
+                    }
+                  }
+        
+                //check for insufficient data
+                if(cells <=4) { 
+                    alert("Insufficient data."); }
+                else {   
+                    //get the total number of columns
+                    var mc = 0;		
+                    for(i=6; i<12; i++)  {
+                        if((!isNaN(X.elements[i].value))) {
+                            mc = mc +1;
+                            }
+                          }
+                    //get the total number of rows
+                    var mr = Math.round(cells/mc);
+                    
+                    //check the validity of TABLE
+                    var PR = mc * mr;
+                    if(PR != cells)  {
+                        alert("Data Entry Error:\nPlease check your DATA entry. ROW - COLUMNS mismatch!");
+                        return false;
+                        }
+                    //make an array of each present row
+                    var SR1 = new Array();
+                    var SR2 = new Array();
+                    var SR3 = new Array();
+                    var SR4 = new Array();
+                    var SR5 = new Array();
+                    var SR6 = new Array();
+                    var SUM1=0; var SUM2=0; var SUM3=0; var SUM4=0; var SUM5=0;var SUM6=0; 		
+                    //FIRST ROW
+                    var a = 0;
+                    for(i=6; i<mc+6; i++)  {
+                        if((!isNaN(X.elements[i].value))) {
+                            SR1[a] = parseFloat(X.elements[i].value);
+                            SUM1 += parseFloat(X.elements[i].value) * PRO[a];
+                            a++;
+                            }
+                          }
+                    a = 0;
+                    //SECOND ROW
+                    for(i=12; i<(mc+12); i++)  {
+                        if((!isNaN(X.elements[i].value))) {
+                            SR2[a] = parseFloat(X.elements[i].value);
+                            SUM2 += parseFloat(X.elements[i].value) * PRO[a];
+                            a++;
+                            }
+                          }
+                    a = 0;
+                    //THIRD row
+                    for(i=18; i<(mc+18); i++)  {
+                        if((!isNaN(X.elements[i].value))) {
+                            SR3[a] = parseFloat(X.elements[i].value);
+                            SUM3 += parseFloat(X.elements[i].value)* PRO[a];
+                            a++;
+                            }
+                          } 
+                    a = 0;
+                    //FOURTH row
+                    for(i=24; i<(mc+24); i++)  {
+                        if((!isNaN(X.elements[i].value))) {
+                            SR4[a] = parseFloat(X.elements[i].value);
+                            SUM4 += parseFloat(X.elements[i].value)* PRO[a];
+                            a++;
+                            }
+                          }		 
+                    a = 0;
+                    //FIFTH row
+                    for(i=30; i<(mc+30); i++)  {
+                        if((!isNaN(X.elements[i].value))) {
+                            SR5[a] = parseFloat(X.elements[i].value);
+                            SUM5 += parseFloat(X.elements[i].value)* PRO[a];
+                            a++;
+                            }
+                          }		
+                    a = 0;
+                    //SIXTH row
+                    for(i=36; i<(mc+36); i++)  {
+                        if((!isNaN(X.elements[i].value))) {
+                            SR6[a] = parseFloat(X.elements[i].value);
+                            SUM6 += parseFloat(X.elements[i].value)* PRO[a];
+                            a++;
+                            }
+                          } 
+                    
+                    //put all the sums in an array
+                    var ASUM = new Array();
+                    var x = 0;
+                    
+                    ASUM[x] = SUM1;
+                    x++; 
+                    if(x<mr) {
+                        ASUM[x] = SUM2;
+                        x++;
+                        }
+                    if(x<mr) {
+                        ASUM[x] = SUM3;
+                        x++;
+                        }
+                    if(x<mr) {
+                        ASUM[x] = SUM4;
+                        x++;
+                        }
+                    if(x<mr) {
+                        ASUM[x] = SUM5;
+                        x++;
+                        }
+                    if(x<mr) {
+                        ASUM[x] = SUM6;
+                        x++;
+                        }					
+    /*				//sort the list
+                    for(i=0; i<ASUM.length-1; i++) { 
+                        for(j=i+1;j<ASUM.length; j++) {
+                          if( eval(ASUM[j]) < eval(ASUM[i]))  {
+                                  temp = ASUM[i];            
+                                  ASUM[i] = ASUM[j];              
+                                  ASUM[j] = temp;            
+                                  }
+                                }
+                            } 
+    */			//check for the largest of LARGEST
+                    var temp = 0;
+                    var maxmax = -1000;
+                    var act = 0;
+                    for(i=0; i<ASUM.length; i++)  {
+                        temp = ASUM[i];
+                        if(temp >= maxmax) {
+                            maxmax = temp;
+                            act = i+1;
+                            }
+                        temp = 0;
+                        }
+                    X.MEVACT.value = act;
+                    X.MEVPOFF.value = maxmax;
+                    
+                    
+    /*				//sort the list
+                    for(i=0; i<PRO.length-1; i++) { 
+                        for(j=i+1;j<PRO.length; j++) {
+                          if( eval(PRO[j]) < eval(PRO[i]))  {
+                                  temp = PRO[i];            
+                                  PRO[i] = PRO[j];              
+                                  PRO[j] = temp;            
+                                  }
+                                }
+                            } 
+    */			//check for largest probability
+                    var tempP = 0;
+                    var maxmaxP = -1000;
+                    var actP = 0;
+                    for(i=0; i<PRO.length; i++)  {
+                        tempP = PRO[i];
+                        if(tempP >= maxmaxP) {
+                            maxmaxP = tempP;
+                            actP = i+1;
+                            }
+                        tempP = 0;
+                        }
+                    X.MLACT.value = actP;
+                    //check for largest row in corresponding column
+                    var PROCOL =  new Array();
+                    var c = 0;
+                    PROCOL[c] = SR1[actP-1];
+                    c++;
+                    if(c<mr) {
+                        PROCOL[c] = SR2[actP-1];
+                        c++;
+                        }
+                    if(c<mr) {
+                        PROCOL[c] = SR3[actP-1];
+                        c++;
+                        }
+                    if(c<mr) {
+                        PROCOL[c] = SR4[actP-1];
+                        c++;
+                        }
+                    if(c<mr) {
+                        PROCOL[c] = SR5[actP-1];
+                        c++;
+                        }
+                    if(c<mr) {
+                        PROCOL[c] = SR6[actP-1];
+                        c++;
+                        }
+                    
+                    
+                    //sort the list
+                    for(i=0; i<PROCOL.length-1; i++) { 
+                        for(j=i+1;j<PROCOL.length; j++) {
+                          if( eval(PROCOL[j]) < eval(PROCOL[i]))  {
+                                  temp = PROCOL[i];            
+                                  PROCOL[i] = PROCOL[j];              
+                                  PROCOL[j] = temp;            
+                                  }
+                                }
+                            } 
+                    //check for largest value in column
+                    var tempC = 0;
+                    var maxmaxC = -1000;
+                    var actC = 0;
+                    for(i=0; i<PROCOL.length; i++)  {
+                        tempC = PROCOL[i];
+                        if(tempC >= maxmaxC) {
+                            maxmaxC = tempC;
+                            actC = i+1;
+                            }
+                        tempC = 0;
+                        }
+                    X.MLPOFF.value = maxmaxC;
+                                                
+                }  //closing for first ELSE			
+            } //closing for ELSE 
+        }				
+        
+                            
+    </script>
+</body>
+</html>
