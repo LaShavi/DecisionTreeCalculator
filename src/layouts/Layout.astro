@@ -1,0 +1,238 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Calculadora de Árbol de Decisiones moderna y responsiva" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <main class="container mx-auto px-4 py-8">
+      <slot />
+    </main>
+    <script type="module" is:inline>
+      // Lógica de calculadora integrada
+      class DecisionTreeCalculator {
+        constructor(data) {
+          this.data = data;
+        }
+
+        validateProbabilities() {
+          const sum = this.data.probabilities.reduce((acc, val) => acc + val, 0);
+          return Math.abs(sum - 1.0) < 0.0000000000000001;
+        }
+
+        validateData() {
+          const totalCells = this.data.values.flat().filter(val => !isNaN(val) && val !== null).length;
+          return totalCells > 4;
+        }
+
+        calculateStep1() {
+          if (!this.validateProbabilities() || !this.validateData()) {
+            throw new Error('Datos inválidos');
+          }
+
+          const probabilities = this.data.probabilities;
+          const values = this.data.values;
+
+          // Calcular pago esperado para cada acción
+          const expectedPayoffs = [];
+          
+          for (let row = 0; row < values.length; row++) {
+            let sum = 0;
+            for (let col = 0; col < probabilities.length; col++) {
+              if (!isNaN(values[row][col])) {
+                sum += values[row][col] * probabilities[col];
+              }
+            }
+            expectedPayoffs.push(sum);
+          }
+
+          // Encontrar la acción con mayor pago esperado
+          const maxExpectedPayoff = Math.max(...expectedPayoffs);
+          const bestAction = expectedPayoffs.indexOf(maxExpectedPayoff) + 1;
+
+          // Encontrar la probabilidad más alta
+          const maxProbability = Math.max(...probabilities);
+          const mostLikelyEventIndex = probabilities.indexOf(maxProbability);
+          
+          // Encontrar el mejor pago en la columna del evento más probable
+          const columnValues = values.map(row => row[mostLikelyEventIndex]).filter(val => !isNaN(val));
+          const maxPayoffInColumn = Math.max(...columnValues);
+
+          return {
+            mostLikelyEvent: {
+              probability: mostLikelyEventIndex + 1,
+              payoff: maxPayoffInColumn
+            },
+            expectedPayoff: {
+              action: bestAction,
+              payoff: maxExpectedPayoff
+            }
+          };
+        }
+
+        calculateStep2() {
+          const step1Results = this.calculateStep1();
+          const probabilities = this.data.probabilities;
+          const values = this.data.values;
+
+          // Encontrar el máximo en cada columna
+          const columnMaxes = [];
+          for (let col = 0; col < probabilities.length; col++) {
+            const columnValues = values.map(row => row[col]).filter(val => !isNaN(val));
+            columnMaxes.push(Math.max(...columnValues));
+          }
+
+          // Crear matriz de arrepentimiento
+          const regretMatrix = [];
+          for (let row = 0; row < values.length; row++) {
+            const regretRow = [];
+            for (let col = 0; col < probabilities.length; col++) {
+              if (!isNaN(values[row][col])) {
+                regretRow.push(columnMaxes[col] - values[row][col]);
+              }
+            }
+            regretMatrix.push(regretRow);
+          }
+
+          // Calcular arrepentimiento esperado para cada acción
+          const expectedRegrets = [];
+          for (let row = 0; row < regretMatrix.length; row++) {
+            let sum = 0;
+            for (let col = 0; col < probabilities.length; col++) {
+              if (regretMatrix[row][col] !== undefined) {
+                sum += regretMatrix[row][col] * probabilities[col];
+              }
+            }
+            expectedRegrets.push(sum);
+          }
+
+          // Encontrar el mínimo arrepentimiento esperado
+          const minExpectedRegret = Math.min(...expectedRegrets);
+          const bestRegretAction = expectedRegrets.indexOf(minExpectedRegret) + 1;
+
+          // Calcular valor de información perfecta
+          const perfectReturn = columnMaxes.reduce((sum, max, index) => sum + max * probabilities[index], 0);
+          const expectedPayoff = step1Results?.expectedPayoff.payoff || 0;
+          const vpi = perfectReturn - expectedPayoff;
+          const efficiency = (vpi / perfectReturn) * 100;
+
+          return {
+            minExpectedRegret: {
+              action: bestRegretAction,
+              payoff: minExpectedRegret
+            },
+            perfectInformation: {
+              return: perfectReturn,
+              value: vpi,
+              efficiency: efficiency
+            }
+          };
+        }
+      }
+
+      // Funciones globales de utilidad
+      function gatherData() {
+        const probabilities = [];
+        const values = [];
+        
+        // Recopilar probabilidades
+        const probInputs = document.querySelectorAll('.probability-input');
+        probInputs.forEach(input => {
+          const value = parseFloat(input.value) || 0;
+          probabilities.push(value);
+        });
+        
+        // Recopilar valores de la matriz
+        const valueInputs = document.querySelectorAll('.value-input');
+        const matrix = {};
+        
+        valueInputs.forEach(input => {
+          const row = parseInt(input.dataset.row || '0');
+          const col = parseInt(input.dataset.col || '0');
+          const value = parseFloat(input.value);
+          
+          if (!isNaN(value)) {
+            const key = `${row}-${col}`;
+            matrix[key] = value;
+          }
+        });
+        
+        // Convertir a array 2D
+        for (let row = 0; row < 6; row++) {
+          const rowValues = [];
+          for (let col = 0; col < 6; col++) {
+            const key = `${row}-${col}`;
+            rowValues.push(matrix[key] || NaN);
+          }
+          values.push(rowValues);
+        }
+        
+        return { probabilities, values };
+      }
+
+      // Funciones globales para calcular
+      window.calculateStep1 = function() {
+        try {
+          const data = gatherData();
+          const calculator = new DecisionTreeCalculator(data);
+          
+          if (!calculator.validateProbabilities()) {
+            throw new Error('Error: Las probabilidades deben sumar exactamente 1.00');
+          }
+          
+          if (!calculator.validateData()) {
+            throw new Error('Error: Datos insuficientes. Se necesitan al menos 5 valores en la matriz.');
+          }
+          
+          const results = calculator.calculateStep1();
+          
+          // Mostrar resultados
+          if (window.showStep1Results) {
+            window.showStep1Results(results);
+          }
+          
+          return results;
+        } catch (error) {
+          throw new Error(error.message || 'Error en el cálculo del Paso 1');
+        }
+      };
+
+      window.calculateStep2 = function() {
+        try {
+          const data = gatherData();
+          const calculator = new DecisionTreeCalculator(data);
+          
+          const results = calculator.calculateStep2();
+          
+          // Mostrar resultados
+          if (window.showStep2Results) {
+            window.showStep2Results(results);
+          }
+          
+          return results;
+        } catch (error) {
+          throw new Error(error.message || 'Error en el cálculo del Paso 2');
+        }
+      };
+    </script>
+  </body>
+</html>
+
+<style>
+  html {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+</style>
