@@ -1,10 +1,9 @@
 import tailwind from '@astrojs/tailwind';
 import { defineConfig } from 'astro/config';
 
-// https://astro.build/config
+// Configuración para desarrollo local
 export default defineConfig({
   integrations: [tailwind()],
-  site: 'https://LaShavi.github.io',
-  base: '/DecisionTreeCalculator',
+  site: 'http://localhost:4321',
   output: 'static'
 });

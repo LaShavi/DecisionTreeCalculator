@@ -26,7 +26,7 @@ Visita la aplicación en: [https://LaShavi.github.io/DecisionTreeCalculator](htt
 │   │   └── Layout.astro
 │   ├── pages/
 │   │   ├── index.astro          # Calculadora principal
-│   │   └── demo.astro           # Página de demostración
+│   │   └── (sin demo.astro)
 │   └── styles/
 │       └── global.css
 ├── astro.config.mjs
